@@ -1,7 +1,6 @@
 .idea
 obj
 bin
-.env
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/aspnetcore,rider
