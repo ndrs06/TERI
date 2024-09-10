@@ -19,8 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\" />
-      <Folder Include="Model\DataModel\" />
       <Folder Include="Service\Repository\" />
     </ItemGroup>
 
