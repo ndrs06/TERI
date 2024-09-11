@@ -36,6 +36,9 @@ namespace TERI_api.Migrations
                     b.Property<int?>("InventoryFoodSlotId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MealId")
+                        .HasColumnType("int");
+
                     b.Property<string>("MealTypes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,9 +50,16 @@ namespace TERI_api.Migrations
                     b.Property<int>("Portion")
                         .HasColumnType("int");
 
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InventoryFoodSlotId");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("Foods");
                 });
@@ -95,6 +105,22 @@ namespace TERI_api.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("TERI_api.Model.DataModel.IngredientCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IngredientCategories");
                 });
 
             modelBuilder.Entity("TERI_api.Model.DataModel.Inventory", b =>
@@ -160,6 +186,27 @@ namespace TERI_api.Migrations
                     b.ToTable("InventoryIngredientSlot");
                 });
 
+            modelBuilder.Entity("TERI_api.Model.DataModel.Meal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MealType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Meals");
+                });
+
             modelBuilder.Entity("TERI_api.Model.DataModel.Recipe", b =>
                 {
                     b.Property<int>("Id")
@@ -198,6 +245,22 @@ namespace TERI_api.Migrations
                     b.ToTable("Recipes");
                 });
 
+            modelBuilder.Entity("TERI_api.Model.DataModel.RecipeCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecipeCategories");
+                });
+
             modelBuilder.Entity("TERI_api.Model.DataModel.User", b =>
                 {
                     b.Property<int>("Id")
@@ -223,6 +286,18 @@ namespace TERI_api.Migrations
                     b.HasOne("TERI_api.Model.DataModel.InventoryFoodSlot", null)
                         .WithMany("Foods")
                         .HasForeignKey("InventoryFoodSlotId");
+
+                    b.HasOne("TERI_api.Model.DataModel.Meal", null)
+                        .WithMany("Foods")
+                        .HasForeignKey("MealId");
+
+                    b.HasOne("TERI_api.Model.DataModel.Recipe", "Recipe")
+                        .WithMany()
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("TERI_api.Model.DataModel.Ingredient", b =>
@@ -259,6 +334,13 @@ namespace TERI_api.Migrations
                         .HasForeignKey("InventoryId");
                 });
 
+            modelBuilder.Entity("TERI_api.Model.DataModel.Meal", b =>
+                {
+                    b.HasOne("TERI_api.Model.DataModel.User", null)
+                        .WithMany("Meals")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("TERI_api.Model.DataModel.Recipe", b =>
                 {
                     b.HasOne("TERI_api.Model.DataModel.User", null)
@@ -287,6 +369,11 @@ namespace TERI_api.Migrations
                     b.Navigation("Ingredients");
                 });
 
+            modelBuilder.Entity("TERI_api.Model.DataModel.Meal", b =>
+                {
+                    b.Navigation("Foods");
+                });
+
             modelBuilder.Entity("TERI_api.Model.DataModel.Recipe", b =>
                 {
                     b.Navigation("Ingredients");
@@ -298,6 +385,8 @@ namespace TERI_api.Migrations
 
                     b.Navigation("Inventory")
                         .IsRequired();
+
+                    b.Navigation("Meals");
 
                     b.Navigation("RecipeCollection");
                 });
