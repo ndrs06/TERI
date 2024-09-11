@@ -9,11 +9,14 @@ public class TERI_Context : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
+    public DbSet<RecipeCategory> RecipeCategories { get; set; }
     public DbSet<Inventory> Inventories { get; set; }
     public DbSet<InventoryFoodSlot> InventoryFoodSlot { get; set; }
     public DbSet<InventoryIngredientSlot> InventoryIngredientSlot { get; set; }
+    public DbSet<Meal> Meals { get; set; }
     public DbSet<Food> Foods { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
+    public DbSet<IngredientCategory> IngredientCategories { get; set; }
 
     public TERI_Context(DbContextOptions<TERI_Context> options) : base(options)
     {
