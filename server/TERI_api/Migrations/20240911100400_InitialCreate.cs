@@ -12,6 +12,32 @@ namespace TERI_api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "IngredientCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IngredientCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecipeCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipeCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -42,6 +68,25 @@ namespace TERI_api.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Meals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MealType = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meals", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Meals_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -120,7 +165,9 @@ namespace TERI_api.Migrations
                     Portion = table.Column<int>(type: "int", nullable: false),
                     MealTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DurabilityType = table.Column<int>(type: "int", nullable: false),
-                    InventoryFoodSlotId = table.Column<int>(type: "int", nullable: true)
+                    RecipeId = table.Column<int>(type: "int", nullable: false),
+                    InventoryFoodSlotId = table.Column<int>(type: "int", nullable: true),
+                    MealId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,6 +177,17 @@ namespace TERI_api.Migrations
                         column: x => x.InventoryFoodSlotId,
                         principalTable: "InventoryFoodSlot",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Foods_Meals_MealId",
+                        column: x => x.MealId,
+                        principalTable: "Meals",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Foods_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,6 +226,16 @@ namespace TERI_api.Migrations
                 column: "InventoryFoodSlotId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Foods_MealId",
+                table: "Foods",
+                column: "MealId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Foods_RecipeId",
+                table: "Foods",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_InventoryIngredientSlotId",
                 table: "Ingredients",
                 column: "InventoryIngredientSlotId");
@@ -194,6 +262,11 @@ namespace TERI_api.Migrations
                 column: "InventoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Meals_UserId",
+                table: "Meals",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Recipes_UserId",
                 table: "Recipes",
                 column: "UserId");
@@ -211,10 +284,19 @@ namespace TERI_api.Migrations
                 name: "Foods");
 
             migrationBuilder.DropTable(
+                name: "IngredientCategories");
+
+            migrationBuilder.DropTable(
                 name: "Ingredients");
 
             migrationBuilder.DropTable(
+                name: "RecipeCategories");
+
+            migrationBuilder.DropTable(
                 name: "InventoryFoodSlot");
+
+            migrationBuilder.DropTable(
+                name: "Meals");
 
             migrationBuilder.DropTable(
                 name: "InventoryIngredientSlot");
