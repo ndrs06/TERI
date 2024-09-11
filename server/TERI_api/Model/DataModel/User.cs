@@ -12,6 +12,8 @@ public class User
     
     public Inventory Inventory { get; set; }
     
+    public ICollection<Meal> Meals { get; set; }
+    
     public ICollection<Recipe> RecipeCollection { get; set; }
     public ICollection<Recipe> FavoriteRecipes { get; set; }
 }

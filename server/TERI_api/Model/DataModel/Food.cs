@@ -11,4 +11,5 @@ public class Food
     public int Portion { get; set; }
     public ICollection<MealType> MealTypes { get; set; }
     public DurabilityType DurabilityType { get; set; }
+    public Recipe Recipe { get; set; }
 }
