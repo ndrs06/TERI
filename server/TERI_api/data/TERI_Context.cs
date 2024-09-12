@@ -35,8 +35,8 @@ public class TERI_Context : IdentityDbContext<IdentityUser, IdentityRole, string
         
         modelBuilder.Entity<User>()
             .HasOne(u => u.IdentityUser)
-            .WithOne()
-            .HasForeignKey<User>(u => u.IdentityEmail)
-            .OnDelete(DeleteBehavior.Restrict);
+            .WithMany()
+            .HasForeignKey(u => u.IdentityEmail)
+            .HasPrincipalKey(iu => iu.Email);
     }
 }
