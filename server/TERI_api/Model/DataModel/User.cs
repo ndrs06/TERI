@@ -8,7 +8,7 @@ public class User
 {
     [Key]
     public int Id { get; init; }
-    public DateTime CreatedOn { get; set; }
+    public DateTime RegistrationDate { get; set; }
     public string Name { get; set; }
     
     public Inventory Inventory { get; set; }
