@@ -5,5 +5,6 @@ namespace TERI_api.Service.Interface.Serv;
 
 public interface IUserService
 {
+    User? GetByEmail(string email);
     void Add(User user);
 }

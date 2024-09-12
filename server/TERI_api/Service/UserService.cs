@@ -13,6 +13,11 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
+    public User? GetByEmail(string email)
+    {
+        return _userRepository.GetByEmail(email);
+    }
+
     public void Add(User user)
     {
         _userRepository.Add(user);
