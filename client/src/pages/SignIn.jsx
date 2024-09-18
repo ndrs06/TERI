@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import {useUser} from "../contexts/UserContext.jsx";
 
 import SignInForm from "../components/SignIn/SignInForm.jsx"
 
@@ -22,9 +23,13 @@ const postSignIn = (user) => {
 
 export default function SignIn() {
     const navigate = useNavigate();
+    const { signIn } = useUser();
 
     const handleSignIn = (user) => {
-        postSignIn(user).then( resp => resp.ok ? navigate("/") : navigate("/sign-in"))
+        postSignIn(user).then( resp => {
+            signIn();
+            resp.ok ? navigate("/") : navigate("/sign-in")
+        })
     }
 
     const props = {
