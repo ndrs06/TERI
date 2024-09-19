@@ -15,7 +15,7 @@ public class RecipeService : IRecipeService
 
     public IEnumerable<Recipe> GetAll()
     {
-        return _recipeRepository.GetAll();
+        return _recipeRepository.GetAll().ToList();
     }
 
     public void Add(Recipe recipe)
