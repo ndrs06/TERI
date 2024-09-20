@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERI_api", "TERI_api\TERI_api.csproj", "{1D66D8BB-4DE9-45BC-9089-CEEED7D2E9F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERI_unittest", "TERI_unittest\TERI_unittest.csproj", "{F36AFD30-010A-460B-B6E6-21947D04BB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERI_integrationtest", "TERI_integrationtest\TERI_integrationtest.csproj", "{07FEECB4-C4A1-476C-852E-61F3C1E5CC40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{1D66D8BB-4DE9-45BC-9089-CEEED7D2E9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D66D8BB-4DE9-45BC-9089-CEEED7D2E9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D66D8BB-4DE9-45BC-9089-CEEED7D2E9F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F36AFD30-010A-460B-B6E6-21947D04BB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F36AFD30-010A-460B-B6E6-21947D04BB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F36AFD30-010A-460B-B6E6-21947D04BB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F36AFD30-010A-460B-B6E6-21947D04BB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07FEECB4-C4A1-476C-852E-61F3C1E5CC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FEECB4-C4A1-476C-852E-61F3C1E5CC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FEECB4-C4A1-476C-852E-61F3C1E5CC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FEECB4-C4A1-476C-852E-61F3C1E5CC40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
