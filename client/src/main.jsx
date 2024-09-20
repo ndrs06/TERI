@@ -9,6 +9,7 @@ import Home from "./pages/Home.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import ProtectedRoutes_user from "./pages/ProtectedRoutes/ProtectedRoutes_user.jsx";
+import Profile from "./pages/Profile.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/" element={<Home />}/>
                 <Route path="/sign-up" element={<SignUp />}/>
                 <Route path="/sign-in" element={<SignIn />}/>
+                <Route path="/profile" element={<Profile />}/>
             </Route>
               
             <Route element={<ProtectedRoutes_user />}>
