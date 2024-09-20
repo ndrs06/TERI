@@ -15,7 +15,7 @@ const postSignIn = (user) => {
         if (!resp.ok) {
             throw new Error(`HTTP error! status: ${resp.status}`);
         }
-        return resp
+        return resp.json()
     }).catch(err => {
         console.error('Error:', err);
     });
@@ -23,12 +23,13 @@ const postSignIn = (user) => {
 
 export default function SignIn() {
     const navigate = useNavigate();
-    const { signIn } = useUser();
+    const { signIn, setUserProfile, userProfile } = useUser();
 
     const handleSignIn = (user) => {
-        postSignIn(user).then( resp => {
+        postSignIn(user).then( data => {
             signIn();
-            resp.ok ? navigate("/") : navigate("/sign-in")
+            setUserProfile(data);
+            data ? navigate("/") : navigate("/sign-in")
         })
     }
 
