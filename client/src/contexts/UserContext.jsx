@@ -1,4 +1,4 @@
-import React, {createContext, useContext} from "react";
+import React, {createContext, useContext, useState} from "react";
 
 const UserContext = createContext(null);
 
@@ -7,6 +7,7 @@ export const useUser = () => {
 };
 
 export const UserContextProvider = ({ children }) => {
+    const [userProfile, setUserProfile] = useState(null);
     const signIn = () => {
         localStorage.setItem('signedIn', true);
         const signOutTime = new Date();
@@ -18,10 +19,17 @@ export const UserContextProvider = ({ children }) => {
         localStorage.removeItem('signedIn');
         localStorage.removeItem('signOutTime' );
     }
+    
+    const props = {
+        userProfile,
+        setUserProfile,
+        signIn,
+        signOut,
+    }
 
     return (
-        <UserContext.Provider value={{ signIn, signOut }}>
+        <UserContext.Provider value={{...props}}>
             { children }
         </UserContext.Provider>
-    );
+    )
 };
