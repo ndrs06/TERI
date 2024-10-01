@@ -29,18 +29,8 @@ public class AuthService : IAuthService
         }
         
         await _userManager.AddToRoleAsync(identityUser, role);
-
-        var user = new User
-        {
-            RegistrationDate = DateTime.Now,
-            Name = username,
-            Inventory = new Inventory(),
-            RecipeCollection = new List<Recipe>(),
-            FavoriteRecipes = new List<Recipe>(),
-            IdentityEmail = email
-        };
         
-        _userService.Add(user);
+        _userService.Add(email, username);
         
         return new AuthResult(true, email, username, "");
     }
