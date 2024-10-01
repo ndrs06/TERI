@@ -18,8 +18,18 @@ public class UserService : IUserService
         return _userRepository.GetByEmail(email);
     }
 
-    public void Add(User user)
+    public void Add(string email, string username)
     {
+        var user = new User
+        {
+            RegistrationDate = DateTime.Now,
+            Name = username,
+            Inventory = new Inventory(),
+            RecipeCollection = new List<Recipe>(),
+            FavoriteRecipes = new List<Recipe>(),
+            IdentityEmail = email
+        };
+        
         _userRepository.Add(user);
     }
 }
