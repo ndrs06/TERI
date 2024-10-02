@@ -1,21 +1,19 @@
 using Microsoft.AspNetCore.Identity;
 using TERI_api.Model.Authentication;
-using TERI_api.Model.DataModel;
-using TERI_api.Service.Interface.Serv;
 
 namespace TERI_api.Service.Authentication;
 
 public class AuthService : IAuthService
 {
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly IUserService _userService;
     private readonly ITokenService _tokenService;
+    private readonly IUserService _userService;
 
-    public AuthService(UserManager<IdentityUser> userManager, IUserService userService, ITokenService tokenService)
+    public AuthService(UserManager<IdentityUser> userManager, ITokenService tokenService, IUserService userService)
     {
         _userManager = userManager;
-        _userService = userService;
         _tokenService = tokenService;
+        _userService = userService;
     }
     
     public async Task<AuthResult> RegisterAsync(string email, string username, string password, string role)
@@ -29,8 +27,7 @@ public class AuthService : IAuthService
         }
         
         await _userManager.AddToRoleAsync(identityUser, role);
-        
-        _userService.Add(email, username);
+        await _userService.AddAsync(email, username);
         
         return new AuthResult(true, email, username, "");
     }
