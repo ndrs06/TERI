@@ -471,7 +471,8 @@ namespace TERI_api.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_IdentityEmail",
                 table: "Users",
-                column: "IdentityEmail");
+                column: "IdentityEmail",
+                unique: true);
         }
 
         /// <inheritdoc />

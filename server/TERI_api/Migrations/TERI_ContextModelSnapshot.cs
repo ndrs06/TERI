@@ -481,7 +481,8 @@ namespace TERI_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityEmail");
+                    b.HasIndex("IdentityEmail")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -611,9 +612,9 @@ namespace TERI_api.Migrations
             modelBuilder.Entity("TERI_api.Model.DataModel.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityEmail")
-                        .HasPrincipalKey("Email")
+                        .WithOne()
+                        .HasForeignKey("TERI_api.Model.DataModel.User", "IdentityEmail")
+                        .HasPrincipalKey("Microsoft.AspNetCore.Identity.IdentityUser", "Email")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
