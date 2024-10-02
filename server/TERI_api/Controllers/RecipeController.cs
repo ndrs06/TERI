@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TERI_api.Model.DataModel;
-using TERI_api.Service.Interface.Serv;
+using TERI_api.Service;
 
 namespace TERI_api.Controllers;
 
@@ -18,11 +18,11 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet(Name = "TERI")]
-    public ActionResult<IEnumerable<Recipe>> Get()
+    public async Task<ActionResult<IEnumerable<Recipe>>> Get()
     {
         try
         {
-            return Ok(_recipeService.GetAll());
+            return Ok(_recipeService.GetAllAsync());
         }
         catch (Exception e)
         {
