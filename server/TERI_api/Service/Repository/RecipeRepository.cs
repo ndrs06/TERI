@@ -1,6 +1,5 @@
 using TERI_api.Data;
 using TERI_api.Model.DataModel;
-using TERI_api.Service.Interface.Repo;
 
 namespace TERI_api.Service.Repository;
 
@@ -13,14 +12,14 @@ public class RecipeRepository : IRecipeRepository
         _dbContext = dbContext;
     }
     
-    public IEnumerable<Recipe> GetAll()
+    public async Task<IEnumerable<Recipe>> GetAllAsync()
     {
         return _dbContext.Recipes.ToList();
     }
 
-    public void Add(Recipe recipe)
+    public async Task AddAsync(Recipe recipe)
     {
         _dbContext.Add(recipe);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
     }
 }
