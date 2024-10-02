@@ -1,6 +1,5 @@
 using TERI_api.Data;
 using TERI_api.Model.DataModel;
-using TERI_api.Service.Interface.Repo;
 
 namespace TERI_api.Service.Repository;
 
@@ -13,36 +12,36 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
     
-    public IEnumerable<User> GetAll()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
         return _dbContext.Users.ToList();
     }
 
-    public User? GetById(int userId)
+    public async Task<User?> GetByIdAsync(int userId)
     {
         return _dbContext.Users.FirstOrDefault(user => user.Id == userId);
     }
 
-    public User? GetByEmail(string email)
+    public async Task<User?> GetByEmailAsync(string email)
     {
         return _dbContext.Users.FirstOrDefault(user => user.IdentityEmail == email);
     }
 
-    public void Add(User user)
+    public async Task AddAsync(User user)
     {
         _dbContext.Add(user);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
     }
 
-    public void Update(User user)
+    public async Task UpdateAsync(User user)
     {
         _dbContext.Update(user);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
     }
 
-    public void Delete(User user)
+    public async Task DeleteAsync(User user)
     {
         _dbContext.Remove(user);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
     }
 }
