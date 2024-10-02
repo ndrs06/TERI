@@ -22,11 +22,11 @@ public class TERI_Context : IdentityDbContext<IdentityUser, IdentityRole, string
 
     public TERI_Context(DbContextOptions<TERI_Context> options) : base(options)
     {
-        if (Database.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator)
+        /*if (Database.GetService<IDatabaseCreator>() is RelationalDatabaseCreator databaseCreator)
         {
             if (!databaseCreator.CanConnect()) databaseCreator.Create();
             if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
-        }
+        }*/
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,8 +35,8 @@ public class TERI_Context : IdentityDbContext<IdentityUser, IdentityRole, string
         
         modelBuilder.Entity<User>()
             .HasOne(u => u.IdentityUser)
-            .WithMany()
-            .HasForeignKey(u => u.IdentityEmail)
-            .HasPrincipalKey(iu => iu.Email);
+            .WithOne()
+            .HasForeignKey<User>(u => u.IdentityEmail)
+            .HasPrincipalKey<IdentityUser>(iu => iu.Email);
     }
 }
