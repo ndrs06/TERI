@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TERI_api.Model.Authentication;
 using TERI_api.Model.DataModel;
+using TERI_api.Service;
 using TERI_api.Service.Authentication;
-using TERI_api.Service.Interface.Serv;
 
 namespace TERI_api.Controllers;
 
@@ -61,7 +61,7 @@ public class AuthController : ControllerBase
         
         HttpContext.Response.Cookies.Append("access_token", token, new CookieOptions{HttpOnly = true});
 
-        return Ok(_userService.GetByEmail(request.Email));
+        return Ok(_userService.GetByEmailAsync(request.Email));
     }
 
     private void AddErrors(AuthResult result)
