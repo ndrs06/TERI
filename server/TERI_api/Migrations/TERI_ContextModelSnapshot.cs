@@ -232,6 +232,9 @@ namespace TERI_api.Migrations
                     b.Property<int>("DurabilityType")
                         .HasColumnType("int");
 
+                    b.Property<int>("FoodSlotId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("InventoryFoodSlotId")
                         .HasColumnType("int");
 
@@ -279,6 +282,9 @@ namespace TERI_api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IngredientCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientSlotId")
                         .HasColumnType("int");
 
                     b.Property<int?>("InventoryIngredientSlotId")
@@ -349,7 +355,7 @@ namespace TERI_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("InventoryId")
+                    b.Property<int>("InventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -371,7 +377,7 @@ namespace TERI_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("InventoryId")
+                    b.Property<int>("InventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -581,14 +587,18 @@ namespace TERI_api.Migrations
                 {
                     b.HasOne("TERI_api.Model.DataModel.Inventory", null)
                         .WithMany("FoodSlots")
-                        .HasForeignKey("InventoryId");
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TERI_api.Model.DataModel.InventoryIngredientSlot", b =>
                 {
                     b.HasOne("TERI_api.Model.DataModel.Inventory", null)
                         .WithMany("IngredientSlots")
-                        .HasForeignKey("InventoryId");
+                        .HasForeignKey("InventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TERI_api.Model.DataModel.Meal", b =>

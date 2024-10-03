@@ -277,7 +277,7 @@ namespace TERI_api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InventoryId = table.Column<int>(type: "int", nullable: true)
+                    InventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,7 +286,8 @@ namespace TERI_api.Migrations
                         name: "FK_InventoryFoodSlot_Inventories_InventoryId",
                         column: x => x.InventoryId,
                         principalTable: "Inventories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -296,7 +297,7 @@ namespace TERI_api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InventoryId = table.Column<int>(type: "int", nullable: true)
+                    InventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -305,7 +306,8 @@ namespace TERI_api.Migrations
                         name: "FK_InventoryIngredientSlot_Inventories_InventoryId",
                         column: x => x.InventoryId,
                         principalTable: "Inventories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,6 +321,7 @@ namespace TERI_api.Migrations
                     MealTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DurabilityType = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
+                    FoodSlotId = table.Column<int>(type: "int", nullable: false),
                     InventoryFoodSlotId = table.Column<int>(type: "int", nullable: true),
                     MealId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -355,6 +358,7 @@ namespace TERI_api.Migrations
                     IngredientCategoryId = table.Column<int>(type: "int", nullable: false),
                     AvgPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IngredientSlotId = table.Column<int>(type: "int", nullable: false),
                     InventoryIngredientSlotId = table.Column<int>(type: "int", nullable: true),
                     RecipeId = table.Column<int>(type: "int", nullable: true)
                 },
