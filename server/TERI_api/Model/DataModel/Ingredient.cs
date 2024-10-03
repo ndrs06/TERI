@@ -9,11 +9,16 @@ public class Ingredient
     [Key]
     public int Id { get; init; }
     public string Name { get; set; }
-    public decimal Quantity { get; set; }
+    public decimal Quantity { get; set; } = 0;
     public UnitType Unit { get; set; }
+    
     [ForeignKey("IngredientCategory")]
     public int IngredientCategoryId { get; set; }
-    
-    public decimal AvgPrice { get; set; }
+
+    public decimal AvgPrice { get; set; } = 0;
     public string ImageUrl { get; set; }
+    
+    [ForeignKey("IngredientSlot")]
+    public int IngredientSlotId { get; set; }
+    
 }
