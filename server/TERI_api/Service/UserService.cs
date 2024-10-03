@@ -6,12 +6,12 @@ namespace TERI_api.Service;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IInventoryService _inventoryService;
+    private readonly IInventoryRepository _inventoryRepository;
 
-    public UserService(IUserRepository userRepository, IInventoryService inventoryService)
+    public UserService(IUserRepository userRepository, IInventoryRepository inventoryRepository)
     {
         _userRepository = userRepository;
-        _inventoryService = inventoryService;
+        _inventoryRepository = inventoryRepository;
     }
 
     public User? GetByEmail(string email)
@@ -32,7 +32,34 @@ public class UserService : IUserService
         
         _userRepository.Add(newUser);
 
-        _inventoryService.AddInventoryToNewUser(newUser.Id);
+        AddInventoryToNewUser(newUser.Id);
         
+    }
+
+    private void AddInventoryToNewUser(int userId)
+    {
+        var inventory = new Inventory
+        {
+            UserId = userId,
+            IngredientSlots = new List<InventoryIngredientSlot>(),
+            FoodSlots = new List<InventoryFoodSlot>()
+        };
+        
+        var ingredientSlot = new InventoryIngredientSlot
+        {
+            Name = "Ingredient Slot #1",
+            Ingredients = new List<Ingredient>()
+        };
+
+        var foodSlot = new InventoryFoodSlot
+        {
+            Name = "Food Slot #2",
+            Foods = new List<Food>()
+        };
+                
+        inventory.IngredientSlots.Add(ingredientSlot);
+        inventory.FoodSlots.Add(foodSlot);
+        
+        _inventoryRepository.Add(inventory);
     }
 }
