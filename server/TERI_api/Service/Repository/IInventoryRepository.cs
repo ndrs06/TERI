@@ -4,9 +4,9 @@ namespace TERI_api.Service.Repository;
 
 public interface IInventoryRepository
 {
-    Task<IEnumerable<Inventory>> GetAllAsync();
-    Task<Inventory?> GetByUserIdAsync(int userId);
-    Task AddAsync(Inventory inventory);
-    Task UpdateAsync(Inventory inventory);
-    Task DeleteAsync(Inventory inventory);
+    IEnumerable<Inventory> GetAll();
+    Inventory? GetByUserId(int userId);
+    void Add(Inventory inventory);
+    void Update(Inventory inventory);
+    void Delete(Inventory inventory);
 }

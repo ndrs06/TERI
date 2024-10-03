@@ -12,28 +12,28 @@ public class InventoryRepository : IInventoryRepository
         _dbContext = dbContext;
     }
 
-    public Task<IEnumerable<Inventory>> GetAllAsync()
+    public IEnumerable<Inventory> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Inventory?> GetByUserIdAsync(int userId)
+    public Inventory? GetByUserId(int userId)
     {
         return _dbContext.Inventories.FirstOrDefault(x => x.UserId == userId);
     }
 
-    public async Task AddAsync(Inventory inventory)
+    public void Add(Inventory inventory)
     {
         _dbContext.Inventories.Add(inventory);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public Task UpdateAsync(Inventory inventory)
+    public void Update(Inventory inventory)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(Inventory inventory)
+    public void Delete(Inventory inventory)
     {
         throw new NotImplementedException();
     }
