@@ -8,8 +8,7 @@ public class Inventory
     [Key]
     public int Id { get; init; }
     [ForeignKey("User")]
-    public int UserId { get; set; }
-    
+    public int UserId { get; init; }
     public ICollection<InventoryIngredientSlot> IngredientSlots { get; set; }
     public ICollection<InventoryFoodSlot> FoodSlots { get; set; }
 }
