@@ -27,7 +27,7 @@ public class AuthService : IAuthService
         }
         
         await _userManager.AddToRoleAsync(identityUser, role);
-        await _userService.AddNewUserAsync(email, username);
+        _userService.AddNewUser(email, username);
         
         return new AuthResult(true, email, username, "");
     }

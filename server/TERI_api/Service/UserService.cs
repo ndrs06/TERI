@@ -14,12 +14,12 @@ public class UserService : IUserService
         _inventoryService = inventoryService;
     }
 
-    public async Task<User?> GetByEmailAsync(string email)
+    public User? GetByEmail(string email)
     {
         return _userRepository.GetByEmail(email);
     }
 
-    public async Task AddNewUserAsync(string email, string username)
+    public void AddNewUser(string email, string username)
     {
         var newUser = new User
         {
@@ -31,12 +31,8 @@ public class UserService : IUserService
         };
         
         _userRepository.Add(newUser);
-        
-        var user = await GetByEmailAsync(email);
 
-        if (user != null)
-        {
-            _inventoryService.AddInventoryToNewUser(user.Id);
-        }
+        _inventoryService.AddInventoryToNewUser(newUser.Id);
+        
     }
 }

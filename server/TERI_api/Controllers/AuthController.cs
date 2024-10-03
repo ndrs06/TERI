@@ -61,7 +61,7 @@ public class AuthController : ControllerBase
         
         HttpContext.Response.Cookies.Append("access_token", token, new CookieOptions{HttpOnly = true});
 
-        return Ok(_userService.GetByEmailAsync(request.Email));
+        return Ok(_userService.GetByEmail(request.Email));
     }
 
     private void AddErrors(AuthResult result)

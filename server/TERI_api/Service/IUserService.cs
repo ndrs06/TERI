@@ -4,6 +4,6 @@ namespace TERI_api.Service;
 
 public interface IUserService
 {
-    Task<User?> GetByEmailAsync(string email);
-    Task AddNewUserAsync(string email, string username);
+    User? GetByEmail(string email);
+    void AddNewUser(string email, string username);
 }
