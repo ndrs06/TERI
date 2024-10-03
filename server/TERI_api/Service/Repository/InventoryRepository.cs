@@ -24,7 +24,7 @@ public class InventoryRepository : IInventoryRepository
 
     public void Add(Inventory inventory)
     {
-        _dbContext.Inventories.Add(inventory);
+        _dbContext.Add(inventory);
         _dbContext.SaveChanges();
     }
 
