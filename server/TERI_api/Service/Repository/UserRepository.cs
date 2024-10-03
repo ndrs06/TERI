@@ -12,36 +12,36 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
     
-    public async Task<IEnumerable<User>> GetAllAsync()
+    public IEnumerable<User> GetAll()
     {
         return _dbContext.Users.ToList();
     }
 
-    public async Task<User?> GetByIdAsync(int userId)
+    public User? GetById(int userId)
     {
         return _dbContext.Users.FirstOrDefault(user => user.Id == userId);
     }
 
-    public async Task<User?> GetByEmailAsync(string email)
+    public User? GetByEmail(string email)
     {
         return _dbContext.Users.FirstOrDefault(user => user.IdentityEmail == email);
     }
 
-    public async Task AddAsync(User user)
+    public void Add(User user)
     {
         _dbContext.Add(user);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public async Task UpdateAsync(User user)
+    public void Update(User user)
     {
         _dbContext.Update(user);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteAsync(User user)
+    public void Delete(User user)
     {
         _dbContext.Remove(user);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 }

@@ -16,8 +16,7 @@ public class UserService : IUserService
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        var user = await _userRepository.GetByEmailAsync(email);
-        return user;
+        return _userRepository.GetByEmail(email);
     }
 
     public async Task AddAsync(string email, string username)
@@ -32,13 +31,13 @@ public class UserService : IUserService
             IdentityEmail = email
         };
         
-        await _userRepository.AddAsync(newUser);
+        _userRepository.Add(newUser);
         
-        var user = await _userRepository.GetByEmailAsync(email);
+        var user = await GetByEmailAsync(email);
 
         if (user != null)
         {
-            var inventory = await _inventoryRepository.GetByUserIdAsync(user.Id);
+            var inventory = _inventoryRepository.GetByUserId(user.Id);
             
             inventory.IngredientSlots = new List<InventoryIngredientSlot>();
             inventory.FoodSlots = new List<InventoryFoodSlot>();

@@ -4,10 +4,10 @@ namespace TERI_api.Service.Repository;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllAsync();
-    Task<User?> GetByIdAsync(int userId);
-    Task<User?> GetByEmailAsync(string email);
-    Task AddAsync(User user);
-    Task UpdateAsync(User user);
-    Task DeleteAsync(User user);
+    IEnumerable<User> GetAll();
+    User? GetById(int userId);
+    User? GetByEmail(string email);
+    void Add(User user);
+    void Update(User user);
+    void Delete(User user);
 }
