@@ -4,6 +4,6 @@ namespace TERI_api.Service;
 
 public interface IRecipeService
 {
-    Task<IEnumerable<Recipe>> GetAllAsync();
-    Task AddAsync(Recipe recipe);
+    IEnumerable<Recipe> GetAll();
+    void Add(Recipe recipe);
 }

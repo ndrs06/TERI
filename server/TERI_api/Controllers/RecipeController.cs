@@ -18,11 +18,11 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet(Name = "TERI")]
-    public async Task<ActionResult<IEnumerable<Recipe>>> Get()
+    public ActionResult<IEnumerable<Recipe>> Get()
     {
         try
         {
-            return Ok(_recipeService.GetAllAsync());
+            return Ok(_recipeService.GetAll());
         }
         catch (Exception e)
         {

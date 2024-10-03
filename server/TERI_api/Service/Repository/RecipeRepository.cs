@@ -12,14 +12,14 @@ public class RecipeRepository : IRecipeRepository
         _dbContext = dbContext;
     }
     
-    public async Task<IEnumerable<Recipe>> GetAllAsync()
+    public IEnumerable<Recipe> GetAll()
     {
         return _dbContext.Recipes.ToList();
     }
 
-    public async Task AddAsync(Recipe recipe)
+    public void Add(Recipe recipe)
     {
         _dbContext.Add(recipe);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 }

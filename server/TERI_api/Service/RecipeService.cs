@@ -12,13 +12,12 @@ public class RecipeService : IRecipeService
         _recipeRepository = recipeRepository;
     }
 
-    public async Task<IEnumerable<Recipe>> GetAllAsync()
+    public IEnumerable<Recipe> GetAll()
     {
-        var recipes = await _recipeRepository.GetAllAsync();
-        return recipes.ToList();
+        return _recipeRepository.GetAll().ToList();
     }
 
-    public Task AddAsync(Recipe recipe)
+    public void Add(Recipe recipe)
     {
         throw new NotImplementedException();
     }

@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 using TERI_api.Controllers;
 using TERI_api.Model.DataModel;
-using TERI_api.Service.Interface.Serv;
+using TERI_api.Service;
 
 namespace TERI_unit_test;
 
